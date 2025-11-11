@@ -7,7 +7,7 @@ on:
       - dev
 
 jobs:
-  flutter_lint:
+  flutterLint:
     name: Flutter Lint Checks
     runs-on: ubuntu-latest
 
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.0' 
+          flutter-version: '3.13.0'  # adjust to your project’s Flutter version
 
       - name: Install dependencies
         run: flutter pub get
@@ -29,7 +29,7 @@ jobs:
       - name: Check for print statements
         run: |
           if grep -R --include="*.dart" "print(" lib/; then
-            echo "❌ Found print() statements! Please remove or replace them."
+            echo "❌ Found print() statements! Please remove them."
             exit 1
           else
             echo "✅ No print() statements found."
