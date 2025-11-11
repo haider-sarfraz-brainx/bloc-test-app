@@ -26,6 +26,7 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
 
   void _editStudent(EditStudent event, Emitter<StudentState> emit) {
     final updated = state.students.map((s) {
+      print("_editStudent kwkw");
       return s.id == event.updatedStudent.id ? event.updatedStudent : s;
     }).toList();
     emit(state.copyWith(students: updated, filteredStudents: updated));
