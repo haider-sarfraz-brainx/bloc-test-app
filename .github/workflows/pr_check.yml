@@ -4,11 +4,11 @@ on:
   pull_request:
     branches:
       - main
-      - develop
+      - dev
 
 jobs:
   flutter-lint:
-    name: Flutter Lint Checks
+    name: Flutter lint checks
     runs-on: ubuntu-latest
 
     steps:
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.0'  # adjust to your project's Flutter version
+          flutter-version: '3.13.0'  # adjust to your project’s Flutter version
 
       - name: Install dependencies
         run: flutter pub get
