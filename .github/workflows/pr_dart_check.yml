@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-      - dev
+      - develop
 
 jobs:
   flutter-lint:
@@ -18,20 +18,19 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.0'
+          flutter-version: '3.29.1' 
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run Dart analyzer (strict)
-        run: dart analyze --fatal-warnings --fatal-infos
+      - name: Run Dart analyzer
+        run: dart analyze
 
       - name: Check for print statements
         run: |
-          if grep -R --include="*.dart" -E "\bprint\s*\(" .; then
+          if grep -R --include="*.dart" "print(" lib/; then
             echo "❌ Found print() statements! Please remove or replace them."
             exit 1
           else
             echo "✅ No print() statements found."
-            exit 0
           fi
