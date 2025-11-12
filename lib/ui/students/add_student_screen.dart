@@ -70,6 +70,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                 hintText: "student Phone Number",
               ),
             ),
+            Text("Hello Test There"),
             ElevatedButton(onPressed: (){
               context.read<StudentBloc>().add(AddStudent(StudentModel(
                   id: context.read<StudentBloc>().state.students.length.toString(),
