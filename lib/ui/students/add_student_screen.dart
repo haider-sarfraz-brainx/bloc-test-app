@@ -95,4 +95,11 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
     phoneController.dispose();
   }
 
+  void addRecord(){
+    print("add setState");
+    setState(() {
+
+    });
+  }
+
 }
