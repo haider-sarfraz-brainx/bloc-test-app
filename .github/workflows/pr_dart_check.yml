@@ -26,7 +26,6 @@ jobs:
         continue-on-error: true
 
       - name: Check for print statements
-        if: always()
         run: |
           echo "🔍 Checking for print() statements..."
           if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android} -E "print\s*\(" .; then
