@@ -22,6 +22,10 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+  
+      - name: Run Dart analyzer
+        run: dart analyze
+        continue-on-error: true
 
       - name: Check for print statements
         run: |
