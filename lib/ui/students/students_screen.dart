@@ -96,4 +96,8 @@ class _StudentsScreenState extends State<StudentsScreen> {
       ),
     );
   }
+  void addRecord(){
+    print("Testing to add setState");
+    setState(() {});
+  }
 }
