@@ -2,9 +2,7 @@ name: PR Code Quality Checks
 
 on:
   pull_request:
-    branches:
-      - main
-      - dev
+    branches: [main, dev]
 
 jobs:
   flutter-lint:
@@ -18,11 +16,11 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.29.1' 
+          flutter-version: '3.29.1'
 
       - name: Install dependencies
         run: flutter pub get
-  
+
       - name: Run Dart analyzer
         run: dart analyze
         continue-on-error: true
@@ -31,12 +29,9 @@ jobs:
         if: always()
         run: |
           echo "🔍 Checking for print() statements..."
-          # Search all Dart files except generated/build dirs
-          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android} 'print\s*(' .; then
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android} -E "print\s*\(" .; then
             echo "❌ Found print() statements! Please remove or replace them with proper logging."
             exit 1
           else
             echo "✅ No print() statements found."
           fi
-
-
