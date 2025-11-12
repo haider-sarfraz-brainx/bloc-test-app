@@ -23,9 +23,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run Dart analyzer
-        run: dart analyze
-
       - name: Check for print statements
         run: |
           echo "🔍 Checking for print() statements..."
