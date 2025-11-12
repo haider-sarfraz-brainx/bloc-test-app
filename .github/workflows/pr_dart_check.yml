@@ -76,57 +76,64 @@ jobs:
           fi
         continue-on-error: true
 
-      - name: Check for hardcoded styles and values
+      - name: Check for hardcoded styles and values        
         if: always()
         run: |
-          echo "🔍 Checking for hardcoded values..."
+          echo "🔍 Checking for hardcoded styles, values, and image paths..."
           HARD_CODED_FOUND=0
 
-          # Check fontFamily
+          # fontFamily
           if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'fontFamily\s*:\s*["'\''].*["'\'']' .; then
             echo "❌ Found hardcoded fontFamily!"
             HARD_CODED_FOUND=1
           fi
 
-          # Check fontSize
+          # fontSize
           if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'fontSize\s*:\s*[0-9]+(\.[0-9]+)?' .; then
             echo "❌ Found hardcoded fontSize!"
             HARD_CODED_FOUND=1
           fi
 
-          # Check size
+          # size
           if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'size\s*:\s*[0-9]+(\.[0-9]+)?' .; then
             echo "❌ Found hardcoded size!"
             HARD_CODED_FOUND=1
           fi
 
-          # Check width
+          # width
           if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'width\s*:\s*[0-9]+(\.[0-9]+)?' .; then
             echo "❌ Found hardcoded width!"
             HARD_CODED_FOUND=1
           fi
 
-          # Check height
+          # height
           if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'height\s*:\s*[0-9]+(\.[0-9]+)?' .; then
             echo "❌ Found hardcoded height!"
             HARD_CODED_FOUND=1
           fi
 
-          # Check color
+          # color
           if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'color\s*:\s*Colors\.[a-zA-Z_]+' .; then
             echo "❌ Found hardcoded color!"
             HARD_CODED_FOUND=1
           fi
 
-          # Check hintText
+          # hintText
           if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'hintText\s*:\s*["'\''].*["'\'']' .; then
             echo "❌ Found hardcoded hintText!"
+            HARD_CODED_FOUND=1
+          fi
+
+          # Image.asset() and SvgPicture.asset() — detect hardcoded asset paths
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E '(Image\.asset|SvgPicture\.asset)\s*\(\s*["'\''].*["'\'']' .; then
+            echo "❌ Found hardcoded image asset paths! Use constants instead of inline paths."
             HARD_CODED_FOUND=1
           fi
 
           if [ $HARD_CODED_FOUND -eq 1 ]; then
             exit 1
           else
-            echo "✅ No hardcoded styles or values found."
+            echo "✅ No hardcoded styles, values, or image paths found."
           fi
         continue-on-error: true
+
