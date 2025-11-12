@@ -1,0 +1,132 @@
+name: PR Code Quality Checks
+
+on:
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  flutter-lint:
+    name: Flutter Lint Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.1'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run Dart analyzer
+        run: dart analyze
+        continue-on-error: true
+
+      - name: Check for print statements
+        if: always()
+        run: |
+          echo "🔍 Checking for print() statements..."
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android} -E "print\s*\(" .; then
+            echo "❌ Found print() statements! Please remove or replace them with proper logging."
+            exit 1
+          else
+            echo "✅ No print() statements found."
+          fi
+        continue-on-error: true
+
+      - name: Check for hardcoded Text() strings
+        if: always()
+        run: |
+          echo "🔍 Checking for hardcoded Text(...) strings..."
+          TEXT_FOUND=0
+
+          # Match Text("...") or Text('...'), ignoring spaces and trailing commas
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'Text\s*\(\s*["'\''].*["'\'']\s*\)' .; then
+            echo "❌ Found hardcoded Text(...) strings! Please use localization instead."
+            TEXT_FOUND=1
+          else
+            echo "✅ No hardcoded Text(...) strings found."
+          fi
+
+          if [ $TEXT_FOUND -eq 1 ]; then
+            exit 1
+          fi
+        continue-on-error: true
+
+      - name: Check for setState() usage
+        if: always()
+        run: |
+          echo "🔍 Checking for setState() usage..."
+          SETSTATE_FOUND=0
+
+          # Search for setState(...) in Dart files, ignoring generated/build folders
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'setState\s*\(' .; then
+            echo "❌ Found setState() usage! Consider using state management instead."
+            SETSTATE_FOUND=1
+          else
+            echo "✅ No setState() usage found."
+          fi
+
+          # Fail the step if any setState() found
+          if [ $SETSTATE_FOUND -eq 1 ]; then
+            exit 1
+          fi
+        continue-on-error: true
+
+      - name: Check for hardcoded styles and values
+        if: always()
+        run: |
+          echo "🔍 Checking for hardcoded values..."
+          HARD_CODED_FOUND=0
+
+          # Check fontFamily
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'fontFamily\s*:\s*["'\''].*["'\'']' .; then
+            echo "❌ Found hardcoded fontFamily!"
+            HARD_CODED_FOUND=1
+          fi
+
+          # Check fontSize
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'fontSize\s*:\s*[0-9]+(\.[0-9]+)?' .; then
+            echo "❌ Found hardcoded fontSize!"
+            HARD_CODED_FOUND=1
+          fi
+
+          # Check size
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'size\s*:\s*[0-9]+(\.[0-9]+)?' .; then
+            echo "❌ Found hardcoded size!"
+            HARD_CODED_FOUND=1
+          fi
+
+          # Check width
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'width\s*:\s*[0-9]+(\.[0-9]+)?' .; then
+            echo "❌ Found hardcoded width!"
+            HARD_CODED_FOUND=1
+          fi
+
+          # Check height
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'height\s*:\s*[0-9]+(\.[0-9]+)?' .; then
+            echo "❌ Found hardcoded height!"
+            HARD_CODED_FOUND=1
+          fi
+
+          # Check color
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'color\s*:\s*Colors\.[a-zA-Z_]+' .; then
+            echo "❌ Found hardcoded color!"
+            HARD_CODED_FOUND=1
+          fi
+
+          # Check hintText
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'hintText\s*:\s*["'\''].*["'\'']' .; then
+            echo "❌ Found hardcoded hintText!"
+            HARD_CODED_FOUND=1
+          fi
+
+          if [ $HARD_CODED_FOUND -eq 1 ]; then
+            exit 1
+          else
+            echo "✅ No hardcoded styles or values found."
+          fi
+        continue-on-error: true

@@ -1,0 +1,36 @@
+name: PR Code Quality Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+
+jobs:
+  flutterLint:
+    name: Flutter Lint Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.0'  # adjust to your project’s Flutter version
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run Dart analyzer
+        run: dart analyze
+
+      - name: Check for print statements
+        run: |
+          if grep -R --include="*.dart" "print(" lib/; then
+            echo "❌ Found print() statements! Please remove them."
+            exit 1
+          else
+            echo "✅ No print() statements found."
+          fi

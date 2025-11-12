@@ -15,8 +15,10 @@
         "flutter_svg"
       ],
       "devDependencies": [
+        "custom_lint",
         "flutter_lints",
-        "flutter_test"
+        "flutter_test",
+        "hardcoded_strings_lint"
       ]
     },
     {
@@ -24,6 +26,39 @@
       "version": "5.0.0",
       "dependencies": [
         "lints"
+      ]
+    },
+    {
+      "name": "hardcoded_strings_lint",
+      "version": "1.0.4",
+      "dependencies": [
+        "analyzer",
+        "analyzer_plugin",
+        "custom_lint_builder"
+      ]
+    },
+    {
+      "name": "custom_lint",
+      "version": "0.8.1",
+      "dependencies": [
+        "analyzer",
+        "analyzer_plugin",
+        "args",
+        "async",
+        "ci",
+        "cli_util",
+        "collection",
+        "custom_lint_core",
+        "freezed_annotation",
+        "json_annotation",
+        "meta",
+        "package_config",
+        "path",
+        "pub_semver",
+        "pubspec_parse",
+        "rxdart",
+        "uuid",
+        "yaml"
       ]
     },
     {
@@ -102,11 +137,62 @@
       "dependencies": []
     },
     {
-      "name": "stream_channel",
-      "version": "2.1.4",
+      "name": "custom_lint_builder",
+      "version": "0.8.1",
       "dependencies": [
-        "async"
+        "analyzer",
+        "analyzer_plugin",
+        "collection",
+        "custom_lint",
+        "custom_lint_core",
+        "custom_lint_visitor",
+        "glob",
+        "hotreloader",
+        "meta",
+        "package_config",
+        "path",
+        "pubspec_parse",
+        "rxdart"
       ]
+    },
+    {
+      "name": "analyzer",
+      "version": "8.1.1",
+      "dependencies": [
+        "_fe_analyzer_shared",
+        "collection",
+        "convert",
+        "crypto",
+        "glob",
+        "meta",
+        "package_config",
+        "path",
+        "pub_semver",
+        "source_span",
+        "watcher",
+        "yaml"
+      ]
+    },
+    {
+      "name": "rxdart",
+      "version": "0.28.0",
+      "dependencies": []
+    },
+    {
+      "name": "pubspec_parse",
+      "version": "1.5.0",
+      "dependencies": [
+        "checked_yaml",
+        "collection",
+        "json_annotation",
+        "pub_semver",
+        "yaml"
+      ]
+    },
+    {
+      "name": "path",
+      "version": "1.9.1",
+      "dependencies": []
     },
     {
       "name": "meta",
@@ -114,9 +200,63 @@
       "dependencies": []
     },
     {
+      "name": "json_annotation",
+      "version": "4.9.0",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
+      "name": "custom_lint_core",
+      "version": "0.8.1",
+      "dependencies": [
+        "analyzer",
+        "analyzer_plugin",
+        "collection",
+        "custom_lint_visitor",
+        "glob",
+        "matcher",
+        "meta",
+        "package_config",
+        "path",
+        "pubspec_parse",
+        "source_span",
+        "uuid",
+        "yaml"
+      ]
+    },
+    {
       "name": "collection",
       "version": "1.19.1",
       "dependencies": []
+    },
+    {
+      "name": "cli_util",
+      "version": "0.4.2",
+      "dependencies": [
+        "meta",
+        "path"
+      ]
+    },
+    {
+      "name": "ci",
+      "version": "0.1.0",
+      "dependencies": []
+    },
+    {
+      "name": "async",
+      "version": "2.12.0",
+      "dependencies": [
+        "collection",
+        "meta"
+      ]
+    },
+    {
+      "name": "stream_channel",
+      "version": "2.1.4",
+      "dependencies": [
+        "async"
+      ]
     },
     {
       "name": "leak_tracker_flutter_testing",
@@ -153,11 +293,6 @@
         "clock",
         "collection"
       ]
-    },
-    {
-      "name": "path",
-      "version": "1.9.1",
-      "dependencies": []
     },
     {
       "name": "matcher",
@@ -248,11 +383,33 @@
       "dependencies": []
     },
     {
-      "name": "async",
-      "version": "2.12.0",
+      "name": "custom_lint_visitor",
+      "version": "1.0.0+8.1.1",
+      "dependencies": [
+        "analyzer"
+      ]
+    },
+    {
+      "name": "source_span",
+      "version": "1.10.1",
       "dependencies": [
         "collection",
+        "path",
+        "term_glyph"
+      ]
+    },
+    {
+      "name": "_fe_analyzer_shared",
+      "version": "88.0.0",
+      "dependencies": [
         "meta"
+      ]
+    },
+    {
+      "name": "string_scanner",
+      "version": "1.4.1",
+      "dependencies": [
+        "source_span"
       ]
     },
     {
@@ -281,25 +438,76 @@
       "dependencies": []
     },
     {
-      "name": "string_scanner",
-      "version": "1.4.1",
-      "dependencies": [
-        "source_span"
-      ]
-    },
-    {
-      "name": "source_span",
-      "version": "1.10.1",
-      "dependencies": [
-        "collection",
-        "path",
-        "term_glyph"
-      ]
-    },
-    {
       "name": "boolean_selector",
       "version": "2.1.2",
       "dependencies": [
+        "source_span",
+        "string_scanner"
+      ]
+    },
+    {
+      "name": "nested",
+      "version": "1.0.0",
+      "dependencies": [
+        "flutter"
+      ]
+    },
+    {
+      "name": "vm_service",
+      "version": "14.3.1",
+      "dependencies": []
+    },
+    {
+      "name": "uuid",
+      "version": "4.5.2",
+      "dependencies": [
+        "crypto",
+        "fixnum",
+        "meta"
+      ]
+    },
+    {
+      "name": "freezed_annotation",
+      "version": "3.1.0",
+      "dependencies": [
+        "collection",
+        "json_annotation",
+        "meta"
+      ]
+    },
+    {
+      "name": "glob",
+      "version": "2.1.3",
+      "dependencies": [
+        "async",
+        "collection",
+        "file",
+        "path",
+        "string_scanner"
+      ]
+    },
+    {
+      "name": "fixnum",
+      "version": "1.1.1",
+      "dependencies": []
+    },
+    {
+      "name": "analyzer_plugin",
+      "version": "0.13.7",
+      "dependencies": [
+        "analyzer",
+        "collection",
+        "dart_style",
+        "path",
+        "pub_semver",
+        "yaml"
+      ]
+    },
+    {
+      "name": "yaml",
+      "version": "3.1.3",
+      "dependencies": [
+        "collection",
         "source_span",
         "string_scanner"
       ]
@@ -349,8 +557,8 @@
       ]
     },
     {
-      "name": "vm_service",
-      "version": "14.3.1",
+      "name": "stream_transform",
+      "version": "2.1.1",
       "dependencies": []
     },
     {
