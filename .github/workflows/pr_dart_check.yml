@@ -28,7 +28,8 @@ jobs:
       - name: Check for print statements
         run: |
           echo "🔍 Checking for print() statements..."
-          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android} -E "print\s*\(" .; then
+          # Search all Dart files except generated/build dirs
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android} 'print\s*(' .; then
             echo "❌ Found print() statements! Please remove or replace them with proper logging."
             exit 1
           else
