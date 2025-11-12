@@ -37,3 +37,26 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Check for hardcoded Text() strings
+        if: always()
+        run: |
+          echo "🔍 Checking for hardcoded Text(...) strings..."
+          # Initialize flag
+          TEXT_FOUND=0
+
+          # Search for Text("...") in Dart files, ignoring generated/build folders
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} 'Text\s*\(\s*".*"\s*\)' .; then
+            echo "❌ Found hardcoded Text(...) strings! Please use localization instead."
+            TEXT_FOUND=1
+          else
+            echo "✅ No hardcoded Text(...) strings found."
+          fi
+
+          # Fail the step if any hardcoded Text() found
+          if [ $TEXT_FOUND -eq 1 ]; then
+            exit 1
+          fi
+        continue-on-error: true
+
+
+
