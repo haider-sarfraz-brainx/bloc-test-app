@@ -28,6 +28,7 @@ jobs:
         continue-on-error: true
 
       - name: Check for print statements
+        if: always()
         run: |
           echo "🔍 Checking for print() statements..."
           # Search all Dart files except generated/build dirs
