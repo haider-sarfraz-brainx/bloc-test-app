@@ -63,7 +63,7 @@ jobs:
           SETSTATE_FOUND=0
 
           # Search for setState(...) in Dart files, ignoring generated/build folders
-          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} 'setState\s*\(' .; then
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'setState\s*\(' .; then
             echo "❌ Found setState() usage! Consider using state management instead."
             SETSTATE_FOUND=1
           else
@@ -75,4 +75,5 @@ jobs:
             exit 1
           fi
         continue-on-error: true
+
 
