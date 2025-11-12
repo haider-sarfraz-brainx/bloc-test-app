@@ -3,6 +3,7 @@ import 'package:bloc_test/bloc/student/student_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../bloc/student/student_events.dart';
 import '../../models/student_model.dart';
@@ -71,6 +72,9 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
               ),
             ),
             Text("Hello Test There"),
+            Icon(Icons.add,size: 32,),
+            Image.asset("assets/icon/flag.png", width: 20,),
+            SvgPicture.asset('assets/icon/flag.svg', height: 40.0,),
             ElevatedButton(onPressed: (){
               context.read<StudentBloc>().add(AddStudent(StudentModel(
                   id: context.read<StudentBloc>().state.students.length.toString(),
@@ -79,7 +83,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                 phoneNumber: phoneController.text
               )));
               Navigator.pop(context);
-            }, child: Text("Add Student", style: TextStyle(fontFamily: "Roboto", fontSize: 16),)),
+            }, child: Text("Add Student", style: TextStyle(fontFamily: "Roboto", fontSize: 16, color: Colors.red),)),
           ],
         ))
     );
