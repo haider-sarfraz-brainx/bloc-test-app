@@ -22,6 +22,11 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("====>>>Test");
+    print("====>>Test2");
+    print("===>>>Test3");
+    print("===>>>Test4");
+    print("===>>>Test5");
     return  Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
