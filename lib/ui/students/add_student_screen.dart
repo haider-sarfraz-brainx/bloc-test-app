@@ -79,7 +79,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                 phoneNumber: phoneController.text
               )));
               Navigator.pop(context);
-            }, child: Text("Add Student")),
+            }, child: Text("Add Student", style: TextStyle(fontFamily: "Roboto", fontSize: 16),)),
           ],
         ))
     );
