@@ -28,9 +28,12 @@ jobs:
 
       - name: Check for print statements
         run: |
-          if grep -R --include="*.dart" "print(" lib/; then
-            echo "❌ Found print() statements! Please remove or replace them."
+          echo "🔍 Checking for print() statements..."
+          # Search all .dart files (excluding generated files and tests if needed)
+          if grep -RIn --include="*.dart" "print\s*(" lib/ bin/ test/; then
+            echo "❌ Found print() statements! Please remove or replace them with proper logging."
             exit 1
           else
             echo "✅ No print() statements found."
           fi
+
