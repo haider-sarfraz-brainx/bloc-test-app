@@ -36,6 +36,8 @@ class _StudentsScreenState extends State<StudentsScreen> {
         child: Column(
           children: [
             Text("Hello Test There"),
+            Text('Hello Test There'),
+            Text("Hello Test There"),
             TextField(
               controller: searchController,
               onTapOutside:(_)=> FocusScope.of(context).unfocus(),
