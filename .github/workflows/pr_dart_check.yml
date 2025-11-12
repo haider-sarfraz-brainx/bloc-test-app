@@ -55,3 +55,24 @@ jobs:
             exit 1
           fi
         continue-on-error: true
+
+      - name: Check for setState() usage
+        if: always()
+        run: |
+          echo "🔍 Checking for setState() usage..."
+          SETSTATE_FOUND=0
+
+          # Search for setState(...) in Dart files, ignoring generated/build folders
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} 'setState\s*\(' .; then
+            echo "❌ Found setState() usage! Consider using state management instead."
+            SETSTATE_FOUND=1
+          else
+            echo "✅ No setState() usage found."
+          fi
+
+          # Fail the step if any setState() found
+          if [ $SETSTATE_FOUND -eq 1 ]; then
+            exit 1
+          fi
+        continue-on-error: true
+
