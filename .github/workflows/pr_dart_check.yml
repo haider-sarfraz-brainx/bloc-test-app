@@ -76,4 +76,30 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Check for hardcoded fontFamily and fontSize
+        if: always()
+        run: |
+          echo "🔍 Checking for hardcoded fontFamily and fontSize..."
+          FONT_FOUND=0
+
+          # Match fontFamily: "..." or '...' in Dart files
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'fontFamily\s*:\s*["'\''].*["'\'']' .; then
+            echo "❌ Found hardcoded fontFamily! Use theme or text styles from constants."
+            FONT_FOUND=1
+          fi
+
+          # Match fontSize: ...
+          if grep -RIn --include='*.dart' --exclude-dir={.dart_tool,build,ios,android,lib/generated} -E 'fontSize\s*:\s*[0-9]+(\.[0-9]+)?' .; then
+            echo "❌ Found hardcoded fontSize! Use theme or constants instead."
+            FONT_FOUND=1
+          fi
+
+          if [ $FONT_FOUND -eq 1 ]; then
+            exit 1
+          else
+            echo "✅ No hardcoded fontFamily or fontSize found."
+          fi
+        continue-on-error: true
+
+
 
