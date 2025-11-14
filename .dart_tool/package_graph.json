@@ -11,7 +11,8 @@
         "cupertino_icons",
         "equatable",
         "flutter",
-        "flutter_bloc"
+        "flutter_bloc",
+        "flutter_stripe"
       ],
       "devDependencies": [
         "flutter_lints",
@@ -41,6 +42,17 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "flutter_stripe",
+      "version": "12.1.0",
+      "dependencies": [
+        "flutter",
+        "meta",
+        "stripe_android",
+        "stripe_ios",
+        "stripe_platform_interface"
       ]
     },
     {
@@ -174,6 +186,31 @@
       ]
     },
     {
+      "name": "stripe_platform_interface",
+      "version": "12.1.0",
+      "dependencies": [
+        "flutter",
+        "freezed_annotation",
+        "json_annotation",
+        "meta",
+        "plugin_platform_interface"
+      ]
+    },
+    {
+      "name": "stripe_ios",
+      "version": "12.1.0",
+      "dependencies": [
+        "flutter"
+      ]
+    },
+    {
+      "name": "stripe_android",
+      "version": "12.1.0",
+      "dependencies": [
+        "flutter"
+      ]
+    },
+    {
       "name": "provider",
       "version": "6.1.5",
       "dependencies": [
@@ -217,6 +254,17 @@
       ]
     },
     {
+      "name": "leak_tracker",
+      "version": "11.0.2",
+      "dependencies": [
+        "clock",
+        "collection",
+        "meta",
+        "path",
+        "vm_service"
+      ]
+    },
+    {
       "name": "term_glyph",
       "version": "1.2.2",
       "dependencies": []
@@ -246,6 +294,22 @@
       ]
     },
     {
+      "name": "json_annotation",
+      "version": "4.9.0",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
+      "name": "freezed_annotation",
+      "version": "3.1.0",
+      "dependencies": [
+        "collection",
+        "json_annotation",
+        "meta"
+      ]
+    },
+    {
       "name": "nested",
       "version": "1.0.0",
       "dependencies": [
@@ -253,20 +317,16 @@
       ]
     },
     {
-      "name": "leak_tracker",
-      "version": "11.0.2",
-      "dependencies": [
-        "clock",
-        "collection",
-        "meta",
-        "path",
-        "vm_service"
-      ]
-    },
-    {
       "name": "vm_service",
       "version": "14.3.1",
       "dependencies": []
+    },
+    {
+      "name": "plugin_platform_interface",
+      "version": "2.1.8",
+      "dependencies": [
+        "meta"
+      ]
     }
   ],
   "configVersion": 1
