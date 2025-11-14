@@ -1,17 +1,36 @@
-import 'package:bloc_test/flavour/flavour_config.dart';
-import 'package:bloc_test/main_common.dart';
+import 'package:bloc_test/bloc/counter/counter_bloc.dart';
+import 'package:bloc_test/bloc/student/student_bloc.dart';
+import 'package:bloc_test/ui/selectable/selectable_text_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Default main entry point - uses dev flavor
-/// For other flavors, use:
-/// - main_dev.dart (Development)
-/// - main_staging.dart (Staging) 
-/// - main_production.dart (Production)
 void main() {
-  mainCommon(
-    flavour: Flavour.dev,
-    baseUrl: "https://www.dev_example.come",
-    name: "Dev",
-  );
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CounterBloc>(
+          create: (context) => CounterBloc(),
+        ),
+        BlocProvider<StudentBloc>(
+          create: (context) => StudentBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        ),
+        home: const CustomSelectableText(),
+      ),
+    );
+  }
 }
 
 

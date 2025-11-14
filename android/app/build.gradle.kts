@@ -8,7 +8,7 @@ plugins {
 android {
     namespace = "com.example.bloc_test"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "26.3.11579264"
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -35,29 +35,6 @@ android {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
-        }
-    }
-
-    flavorDimensions += "app"
-
-    productFlavors {
-        create("dev") {
-            dimension = "app"
-            applicationIdSuffix = ".dev"
-            versionNameSuffix = "-dev"
-            resValue("string", "app_name", "Bloc Dev")
-        }
-
-        create("staging") {
-            dimension = "app"
-            applicationIdSuffix = ".staging"
-            versionNameSuffix = "-staging"
-            resValue("string", "app_name", "Bloc Staging")
-        }
-
-        create("production") {
-            dimension = "app"
-            resValue("string", "app_name", "Bloc Production")
         }
     }
 

@@ -294,6 +294,13 @@
       ]
     },
     {
+      "name": "plugin_platform_interface",
+      "version": "2.1.8",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
       "name": "json_annotation",
       "version": "4.9.0",
       "dependencies": [
@@ -320,13 +327,6 @@
       "name": "vm_service",
       "version": "14.3.1",
       "dependencies": []
-    },
-    {
-      "name": "plugin_platform_interface",
-      "version": "2.1.8",
-      "dependencies": [
-        "meta"
-      ]
     }
   ],
   "configVersion": 1
