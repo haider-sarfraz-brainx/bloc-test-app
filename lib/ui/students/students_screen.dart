@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../bloc/student/student_bloc.dart';
 import '../../bloc/student/student_events.dart';
@@ -21,6 +22,9 @@ class _StudentsScreenState extends State<StudentsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("====>>>Test1");
+    print("====>>>Test2");
+    print('====>>>Test2');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
@@ -54,6 +58,8 @@ class _StudentsScreenState extends State<StudentsScreen> {
                 return SizedBox(height: 10,);
               }
             ),
+            Image.asset("assets/flag.png"),
+            SvgPicture.asset("assets/flag.svg"),
             Expanded(
               child:BlocBuilder<StudentBloc, StudentState>(
 
@@ -84,7 +90,11 @@ class _StudentsScreenState extends State<StudentsScreen> {
                       ),
                     );
                   }, separatorBuilder: (context, index) => SizedBox(height: 10,),
-                      itemCount: students.length): Center(child: Text("No Record Found"),);
+                      itemCount: students.length): Center(child: Text("No Record Found", style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Roboto', color: Colors.red
+                  ),),);
                 }
               ),
             )
@@ -92,5 +102,10 @@ class _StudentsScreenState extends State<StudentsScreen> {
         ),
       ),
     );
+  }
+
+  void addStudent(){
+    print("student added");
+    setState(() {});
   }
 }
