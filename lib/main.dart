@@ -1,6 +1,7 @@
 import 'package:bloc_test/bloc/counter/counter_bloc.dart';
 import 'package:bloc_test/bloc/student/student_bloc.dart';
 import 'package:bloc_test/ui/selectable/selectable_text_screen.dart';
+import 'package:bloc_test/ui/students/students_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const CustomSelectableText(),
+        home: const StudentsScreen(),
       ),
     );
   }

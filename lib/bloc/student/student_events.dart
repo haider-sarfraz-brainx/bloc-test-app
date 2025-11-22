@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import '../../models/student_model.dart';
 
@@ -10,7 +12,8 @@ abstract class StudentEvent extends Equatable {
 
 class AddStudent extends StudentEvent {
   final StudentModel student;
-  const AddStudent(this.student);
+  final Completer<void> completer;
+  const AddStudent(this.student, this.completer);
 
   @override
   List<Object?> get props => [student];

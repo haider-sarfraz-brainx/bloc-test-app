@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_test/bloc/student/student_bloc.dart';
 import 'package:bloc_test/bloc/student/student_states.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,60 +24,66 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.amber,
-        title: Text("Add student"),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          spacing: 20,
-          children: [
-            TextField(
-              controller: nameController,
-              onTapOutside:(_)=> FocusScope.of(context).unfocus(),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: Colors.amber)
+
+    return  Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.amber,
+            title: Text("Add student"),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
+              spacing: 20,
+              children: [
+                TextField(
+                  controller: nameController,
+                  onTapOutside:(_)=> FocusScope.of(context).unfocus(),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.amber)
+                    ),
+                    hintText: "student Name",
+                  ),
                 ),
-                hintText: "student Name",
-              ),
-            ),
-            TextField(
-              controller: emailController,
-              onTapOutside:(_)=> FocusScope.of(context).unfocus(),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.amber)
+                TextField(
+                  controller: emailController,
+                  onTapOutside:(_)=> FocusScope.of(context).unfocus(),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.amber)
+                    ),
+                    hintText: "student Email",
+                  ),
                 ),
-                hintText: "student Email",
-              ),
-            ),
-            TextField(
-              controller: phoneController,
-              onTapOutside:(_)=> FocusScope.of(context).unfocus(),
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.amber)
+                TextField(
+                  controller: phoneController,
+                  onTapOutside:(_)=> FocusScope.of(context).unfocus(),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: Colors.amber)
+                    ),
+                    hintText: "student Phone Number",
+                  ),
                 ),
-                hintText: "student Phone Number",
-              ),
-            ),
-            ElevatedButton(onPressed: (){
-              context.read<StudentBloc>().add(AddStudent(StudentModel(
-                  id: context.read<StudentBloc>().state.students.length.toString(),
-                name: nameController.text,
-                email: emailController.text,
-                phoneNumber: phoneController.text
-              )));
-              Navigator.pop(context);
-            }, child: Text("Add Student")),
-          ],
-        ))
+                ElevatedButton(onPressed:addStudent, child: Text("Add Student")),
+              ],
+            ))
+        ),
+        BlocSelector<StudentBloc, StudentState, bool>(
+          selector: (state) => state.loading,
+          builder: (context, isLoading) {
+            return isLoading? Container(
+              color: Colors.black.withValues(alpha: 0.25),
+              child: Center(child: CircularProgressIndicator(color: Colors.amber,),),
+            ):SizedBox();
+          }
+        )
+      ],
     );
   }
 
@@ -87,6 +95,20 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
     nameController.dispose();
     emailController.dispose();
     phoneController.dispose();
+  }
+
+  Future<void> addStudent() async {
+    FocusManager.instance.primaryFocus?.unfocus();
+    final studentBloc=  context.read<StudentBloc>();
+    final Completer<void> completer = Completer<void>();
+    studentBloc.add(AddStudent(StudentModel(
+        id: studentBloc.state.students.length.toString(),
+        name: nameController.text,
+        email: emailController.text,
+        phoneNumber: phoneController.text
+    ), completer));
+    await completer.future;
+    Navigator.pop(context);
   }
 
 }

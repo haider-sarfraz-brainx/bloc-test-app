@@ -14,27 +14,43 @@ class StudentBloc extends Bloc<StudentEvent, StudentState> {
     on<SearchStudent>(_searchStudent);
   }
 
-  void _addStudent(AddStudent event, Emitter<StudentState> emit) {
+  Future<void> _addStudent(AddStudent event, Emitter<StudentState> emit) async {
+    emit(state.copyWith(loading: true));
     final updated = List<StudentModel>.from(state.students)..add(event.student);
-    emit(state.copyWith(students: updated, filteredStudents: updated));
+    await Future.delayed(Duration(seconds: 2));
+    emit(state.copyWith(loading: false));
+    emit(state.copyWith(
+      students: updated,
+      filteredStudents: updated,
+      statusMessage: 'New student added successfully',
+    ));
+    // Clear the status message after emitting
+    emit(state.copyWith(students: updated, filteredStudents: updated, statusMessage: null,));
+    event.completer.complete();
   }
 
   void _deleteStudent(DeleteStudent event, Emitter<StudentState> emit) {
     final updated = state.students.where((s) => s.id != event.id).toList();
-    emit(state.copyWith(students: updated, filteredStudents: updated));
+
+    emit(state.copyWith(
+      students: updated,
+      filteredStudents: updated,
+      statusMessage: 'student remove successfully',
+    ));
+    // Clear the status message after emitting
+    emit(state.copyWith(students: updated, filteredStudents: updated, statusMessage: null,));
+
   }
 
   void _editStudent(EditStudent event, Emitter<StudentState> emit) {
-    final updated = state.students.map((s) {
+  state.students.map((s) {
       return s.id == event.updatedStudent.id ? event.updatedStudent : s;
     }).toList();
-    emit(state.copyWith(students: updated, filteredStudents: updated));
   }
 
   void _searchStudent(SearchStudent event, Emitter<StudentState> emit) {
-    final filtered = state.students
+   state.students
         .where((s) => s.name.toLowerCase().contains(event.query.toLowerCase()))
         .toList();
-    emit(state.copyWith(filteredStudents: filtered));
   }
 }
