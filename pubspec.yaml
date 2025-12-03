@@ -39,6 +39,7 @@ dependencies:
   bloc: ^9.0.0
   flutter_bloc: ^9.1.1
   flutter_stripe: ^12.1.0
+  syncfusion_flutter_charts: ^31.2.16
 
 dev_dependencies:
   flutter_test:

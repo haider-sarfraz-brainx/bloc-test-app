@@ -4,6 +4,10 @@ import 'package:bloc_test/ui/selectable/selectable_text_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'graph/bar_graph_screen.dart';
+import 'graph/combination_graph_screen.dart';
+import 'graph/pie_chart.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -27,7 +31,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const CustomSelectableText(),
+        home: const CombinationChart(),
       ),
     );
   }

@@ -12,7 +12,8 @@
         "equatable",
         "flutter",
         "flutter_bloc",
-        "flutter_stripe"
+        "flutter_stripe",
+        "syncfusion_flutter_charts"
       ],
       "devDependencies": [
         "flutter_lints",
@@ -41,6 +42,16 @@
         "stack_trace",
         "stream_channel",
         "test_api",
+        "vector_math"
+      ]
+    },
+    {
+      "name": "syncfusion_flutter_charts",
+      "version": "31.2.16",
+      "dependencies": [
+        "flutter",
+        "intl",
+        "syncfusion_flutter_core",
         "vector_math"
       ]
     },
@@ -183,6 +194,23 @@
         "stream_channel",
         "string_scanner",
         "term_glyph"
+      ]
+    },
+    {
+      "name": "syncfusion_flutter_core",
+      "version": "31.2.16",
+      "dependencies": [
+        "flutter",
+        "vector_math"
+      ]
+    },
+    {
+      "name": "intl",
+      "version": "0.20.2",
+      "dependencies": [
+        "clock",
+        "meta",
+        "path"
       ]
     },
     {
