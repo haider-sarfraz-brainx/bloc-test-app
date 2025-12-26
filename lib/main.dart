@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc/counter/counter_bloc.dart';
-import 'package:bloc_test/bloc/student/student_bloc.dart';
-import 'package:bloc_test/ui/selectable/selectable_text_screen.dart';
-import 'package:bloc_test/ui/students/students_screen.dart';
+import 'package:bloc_test/core/injection/injection_container.dart';
+import 'package:bloc_test/presentation/bloc/student/student_bloc.dart';
+import 'package:bloc_test/presentation/pages/students/students_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CounterBloc(),
         ),
         BlocProvider<StudentBloc>(
-          create: (context) => StudentBloc(),
+          create: (context) => InjectionContainer.getStudentBloc(),
         ),
       ],
       child: MaterialApp(
@@ -28,10 +28,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const StudentsScreen(),
+        home: const StudentsPage(),
       ),
     );
   }
 }
-
-
