@@ -9,3 +9,7 @@ abstract class CounterEvent extends Equatable{
 class increament extends CounterEvent{}
 class decreament extends CounterEvent{}
 class reset extends CounterEvent{}
+class automaticIsolate extends CounterEvent{}
+class manualIsolate extends CounterEvent{}
+class playIsolate extends CounterEvent{}
+class pauseIsolate extends CounterEvent{}
