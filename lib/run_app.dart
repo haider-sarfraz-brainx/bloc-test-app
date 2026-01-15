@@ -13,19 +13,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<CounterBloc>(
-          create: (context) => CounterBloc(),
-        ),
-        BlocProvider<StudentBloc>(
-          create: (context) => StudentBloc(),
-        ),
+        BlocProvider<CounterBloc>(create: (context) => CounterBloc()),
+        BlocProvider<StudentBloc>(create: (context) => StudentBloc()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const CustomSelectableText(),
+        home: const StudentsScreen(),
       ),
     );
   }

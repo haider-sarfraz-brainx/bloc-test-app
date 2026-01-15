@@ -16,24 +16,35 @@ class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( title: Text("Counter App"),),
+      appBar: AppBar(title: Text("Counter App")),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           BlocBuilder<CounterBloc, CounterState>(
-            builder: (context,state) {
-              return Text(state.counter.toString(), style: TextStyle(fontSize: 50),);
-            }
+            builder: (context, state) {
+              return Text(
+                state.counter.toString(),
+                style: TextStyle(fontSize: 50),
+              );
+            },
           ),
           Row(
             children: [
-              ElevatedButton(onPressed: ()=> context.read<CounterBloc>().add(increament()), child: Text("Increment")),
-              ElevatedButton(onPressed: ()=> context.read<CounterBloc>().add(decreament()), child: Text("Decrement")),
-              ElevatedButton(onPressed: ()=> context.read<CounterBloc>().add(reset()), child: Text("Reset")),
+              ElevatedButton(
+                onPressed: () => context.read<CounterBloc>().add(increament()),
+                child: Text("Increment"),
+              ),
+              ElevatedButton(
+                onPressed: () => context.read<CounterBloc>().add(decreament()),
+                child: Text("Decrement"),
+              ),
+              ElevatedButton(
+                onPressed: () => context.read<CounterBloc>().add(reset()),
+                child: Text("Reset"),
+              ),
             ],
-          )
-
+          ),
         ],
       ),
     );

@@ -8,6 +8,10 @@ abstract class StudentEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class LoadStudents extends StudentEvent {
+  const LoadStudents();
+}
+
 class AddStudent extends StudentEvent {
   final StudentModel student;
   const AddStudent(this.student);

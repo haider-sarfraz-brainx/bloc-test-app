@@ -23,10 +23,12 @@ void main() {
   });
 
   test('returns requiresParentConsent data when API responds 401', () async {
-    when(() => mockClient.post(
-          Uri.parse('https://rollstrong-dev.brainxdemo.com/api/v1/auth/login'),
-          body: any(named: 'body'),
-        )).thenAnswer(
+    when(
+      () => mockClient.post(
+        Uri.parse('https://rollstrong-dev.brainxdemo.com/api/v1/auth/login'),
+        body: any(named: 'body'),
+      ),
+    ).thenAnswer(
       (_) async => http.Response(
         jsonEncode({
           "message":
@@ -35,8 +37,8 @@ void main() {
           "data": {
             "userId": "695e0c1641adc352b4b8defa",
             "parentEmail": "alibuttm035@gmail.com",
-            "requiresParentConsent": true
-          }
+            "requiresParentConsent": true,
+          },
         }),
         401,
       ),

@@ -42,10 +42,15 @@ class LoginApiResponse {
     final dataJson = json['data'];
     return LoginApiResponse(
       message: json['message']?.toString() ?? '',
-      status: (json['status'] is int)
-          ? (json['status'] as int)
-          : int.tryParse(json['status']?.toString() ?? '') ?? httpStatusCode,
-      data: dataJson is Map<String, dynamic> ? LoginData.fromJson(dataJson) : null,
+      status:
+          (json['status'] is int)
+              ? (json['status'] as int)
+              : int.tryParse(json['status']?.toString() ?? '') ??
+                  httpStatusCode,
+      data:
+          dataJson is Map<String, dynamic>
+              ? LoginData.fromJson(dataJson)
+              : null,
       httpStatusCode: httpStatusCode,
     );
   }
@@ -56,15 +61,12 @@ class ApiService {
   final http.Client client;
 
   ApiService({required this.baseUrl, http.Client? client})
-      : client = client ?? http.Client();
+    : client = client ?? http.Client();
 
   Future<LoginApiResponse> userLogin() async {
     final response = await client.post(
       Uri.parse('${baseUrl}auth/login'),
-      body: {
-        'email': 'ali.iqbal@brainxtech.com',
-        'password': 'Admin @12.',
-      },
+      body: {'email': 'ali.iqbal@brainxtech.com', 'password': 'Admin @12.'},
     );
 
     final decoded = jsonDecode(response.body);
@@ -72,6 +74,9 @@ class ApiService {
       throw const FormatException('Invalid response');
     }
 
-    return LoginApiResponse.fromJson(decoded, httpStatusCode: response.statusCode);
+    return LoginApiResponse.fromJson(
+      decoded,
+      httpStatusCode: response.statusCode,
+    );
   }
 }

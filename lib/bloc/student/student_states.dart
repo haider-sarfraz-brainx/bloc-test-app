@@ -5,10 +5,7 @@ class StudentState extends Equatable {
   final List<StudentModel> students;
   final List<StudentModel> filteredStudents;
 
-  const StudentState({
-    required this.students,
-    required this.filteredStudents,
-  });
+  const StudentState({required this.students, required this.filteredStudents});
 
   factory StudentState.initial() {
     return const StudentState(students: [], filteredStudents: []);

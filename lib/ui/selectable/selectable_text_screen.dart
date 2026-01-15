@@ -20,18 +20,19 @@ class CustomSelectableText extends StatelessWidget {
                       final items =
                           selectableRegionState.contextMenuButtonItems;
                       final copyItem = items.firstWhere(
-                            (item) =>
-                        item.type == ContextMenuButtonType.copy &&
+                        (item) =>
+                            item.type == ContextMenuButtonType.copy &&
                             item.onPressed != null,
-                        orElse: () => ContextMenuButtonItem(
-                            type: ContextMenuButtonType.custom, onPressed: () {  }),
+                        orElse:
+                            () => ContextMenuButtonItem(
+                              type: ContextMenuButtonType.custom,
+                              onPressed: () {},
+                            ),
                       );
                       if (copyItem.onPressed != null) {
                         copyItem.onPressed!();
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Copied to clipboard'),
-                          ),
+                          const SnackBar(content: Text('Copied to clipboard')),
                         );
                       }
                       ContextMenuController.removeAny();
@@ -43,11 +44,14 @@ class CustomSelectableText extends StatelessWidget {
                       final items =
                           selectableRegionState.contextMenuButtonItems;
                       final selectAllItem = items.firstWhere(
-                            (item) =>
-                        item.type == ContextMenuButtonType.selectAll &&
+                        (item) =>
+                            item.type == ContextMenuButtonType.selectAll &&
                             item.onPressed != null,
-                        orElse: () => ContextMenuButtonItem(
-                            type: ContextMenuButtonType.custom, onPressed: () {  }),
+                        orElse:
+                            () => ContextMenuButtonItem(
+                              type: ContextMenuButtonType.custom,
+                              onPressed: () {},
+                            ),
                       );
                       selectAllItem.onPressed?.call();
                     },
