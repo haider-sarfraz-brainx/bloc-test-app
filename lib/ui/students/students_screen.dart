@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/student/student_bloc.dart';
 import '../../bloc/student/student_events.dart';
 import '../../bloc/student/student_states.dart';
-import '../../flavour/flavour_config.dart';
 import '../../models/student_model.dart';
 import 'add_student_screen.dart';
 
@@ -24,7 +23,7 @@ class _StudentsScreenState extends State<StudentsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.amber,
-        title: Text("Students - ${FlavourConfig.instance.name} - ${FlavourConfig.instance.baseUrl}", style: TextStyle(fontSize: 12),),
+        title: Text("Students", style: TextStyle(fontSize: 12),),
         actions: [
           IconButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (context) => AddStudentScreen()));
