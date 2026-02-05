@@ -1,12 +1,10 @@
-import 'package:bloc_test/bloc/counter/counter_bloc.dart';
-import 'package:bloc_test/ui/authentication/login_screen.dart';
-import 'package:bloc_test/ui/counter_screen.dart';
-import 'package:bloc_test/ui/selectable/selectable_text_screen.dart';
-import 'package:bloc_test/ui/students/students_screen.dart';
+import 'package:bloc_test/bloc/authentication/authentication_bloc.dart';
+import 'package:bloc_test/bloc/chat/chat_bloc.dart';
+import 'package:bloc_test/bloc/conversation/conversation_bloc.dart';
+import 'package:bloc_test/bloc/users/users_bloc.dart';
+import 'package:bloc_test/ui/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'bloc/student/student_bloc.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,19 +13,25 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<CounterBloc>(
-          create: (context) => CounterBloc(),
+        BlocProvider<AuthenticationBloc>(
+          create: (context) => AuthenticationBloc(),
         ),
-        BlocProvider<StudentBloc>(
-          create: (context) => StudentBloc(),
+        BlocProvider<UsersBloc>(
+          create: (context) => UsersBloc(),
+        ),
+        BlocProvider<ChatBloc>(
+          create: (context) => ChatBloc(),
+        ),
+        BlocProvider<ConversationBloc>(
+          create: (context) => ConversationBloc(),
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Official Chat App',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         ),
-        home: const LoginScreen(),
+        home: const SplashScreen(),
       ),
     );
   }
